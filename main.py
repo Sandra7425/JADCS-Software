@@ -17,7 +17,7 @@ async def lista_doc_usuario(nombre: str):
     el_usuario = getUsuario(nombre)
     if el_usuario is None:
         raise HTTPException(status_code=404,
-                            detail="El usuario no existeee")
+                            detail="El usuario no existe")
 
     lista_doc = listar_documentos_usuario(nombre)
     if lista_doc is None:
@@ -31,7 +31,7 @@ async def lista_doc_usuario(nombre: str):
 @app.post("/cargar/documento")
 async def agregar_doc(documento: DocumentoIn, nombre: str):
     if getUsuario(nombre) is None:
-        raise HTTPException(status_code=404, detail="El usuario no existee")
+        raise HTTPException(status_code=404, detail="El usuario no existe")
 
     documento_db = DocumentoInDB(**documento.dict(), semaforo="")
     definir_semaforo(documento_db)
@@ -49,7 +49,7 @@ async def eliminar_documento(nombre: str, id_radicado: str):
     if (quitar_doc_lista(nombre, id_radicado) == False):
         return {"mensaje":"Este radicado no esta asignado a este persona"}
     else:
-        return {"mensaje":"Se a eliminado correctamente el radicado"}
+        return {"mensaje":"Se ha eliminado correctamente el radicado"}
 
 
 # Operación GET (READ) para perfil de usuario
